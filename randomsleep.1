@@ -1,0 +1,64 @@
+.Dd January 25, 2026
+.Dt RANDOMSLEEP 1
+.Os
+.Sh NAME
+.Nm randomsleep
+.Nd sleep for a cryptographically random amount of time
+.Sh SYNOPSIS
+.Nm
+.Op Fl q
+.Op Fl f Ar floor
+.Op Fl c Ar ceiling
+.Sh DESCRIPTION
+The
+.Nm
+utility suspends execution for a random interval of time. It is designed
+primarily for use in cron jobs to introduce jitter, preventing
+.Dq thundering herd
+issues where multiple systems attempt to perform tasks simultaneously.
+.Pp
+.Nm
+uses the
+.Xr arc4random_uniform 3
+function on BSDs and macOS, or the
+.Xr getrandom 2
+syscall on Linux, to ensure the random delay is cryptographically secure and
+free from modulo bias.
+.Pp
+The options are as follows:
+.Bl -tag -width "-c ceiling"
+.It Fl c Ar ceiling
+Set the maximum number of seconds to sleep.
+The default is 1800 (30 minutes).
+.It Fl f Ar floor
+Set the minimum number of seconds to sleep.
+The default is 0.
+.It Fl q
+Quiet mode. Suppress the standard output message indicating how long
+.Nm
+will sleep.
+.El
+.Sh EXAMPLES
+Sleep for a random time between 0 and 1800 seconds (default):
+.Pp
+.Dl $ randomsleep
+.Pp
+Sleep for a random time between 10 and 60 seconds:
+.Pp
+.Dl $ randomsleep -f 10 -c 60
+.Pp
+Use in a crontab to run a backup daily at 3:00 AM, with a delay of up to
+10 minutes:
+.Pp
+.Dl 0 3 * * * /usr/local/bin/randomsleep -c 600 && /path/to/backup.sh
+.Sh SEE ALSO
+.Xr sleep 1 ,
+.Xr arc4random 3 ,
+.Xr getrandom 2 ,
+.Xr cron 8
+.Sh HISTORY
+The
+.Nm
+utility was written in 2026.
+.Sh AUTHORS
+.An Patrick Tudor Aq Mt ptudor@ptudor.net
