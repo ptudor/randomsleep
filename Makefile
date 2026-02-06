@@ -14,25 +14,26 @@ MANDIR  = $(PREFIX)/man/man1
 # Compiler settings
 CC     ?= clang
 CFLAGS ?= -O2 -Wall -Wextra -pedantic -std=c99
+LDFLAGS ?=
 
 # Targets
 all: $(PROG)
 
 $(PROG): $(OBJS)
-	$(CC) $(CFLAGS) -o $@ $(OBJS)
+	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $(OBJS)
 
 .c.o:
 	$(CC) $(CFLAGS) -c $< -o $@
 
 install: $(PROG) $(MAN)
-	mkdir -p $(BINDIR)
-	mkdir -p $(MANDIR)
-	install -m 555 $(PROG) $(BINDIR)/$(PROG)
-	install -m 444 $(MAN) $(MANDIR)/$(MAN)
+	mkdir -p $(DESTDIR)$(BINDIR)
+	mkdir -p $(DESTDIR)$(MANDIR)
+	install -m 555 $(PROG) $(DESTDIR)$(BINDIR)/$(PROG)
+	install -m 444 $(MAN) $(DESTDIR)$(MANDIR)/$(MAN)
 
 uninstall:
-	rm -f $(BINDIR)/$(PROG)
-	rm -f $(MANDIR)/$(MAN)
+	rm -f $(DESTDIR)$(BINDIR)/$(PROG)
+	rm -f $(DESTDIR)$(MANDIR)/$(MAN)
 
 clean:
 	rm -f $(PROG) $(OBJS)

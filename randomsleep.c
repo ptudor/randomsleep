@@ -71,6 +71,9 @@ int main(int argc, char *argv[]) {
         }
     }
 
+    if (optind < argc)
+        errx(1, "unexpected argument: %s", argv[optind]);
+
     if (min_arg > max_arg) {
         errx(1, "error: floor (%ld) cannot be greater than ceiling (%ld)", min_arg, max_arg);
     }

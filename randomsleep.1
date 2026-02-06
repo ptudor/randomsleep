@@ -12,7 +12,8 @@
 .Sh DESCRIPTION
 The
 .Nm
-utility suspends execution for a random interval of time. It is designed
+utility suspends execution for a random interval of time.
+It is designed
 primarily for use in cron jobs to introduce jitter, preventing
 .Dq thundering herd
 issues where multiple systems attempt to perform tasks simultaneously.
@@ -34,7 +35,8 @@ The default is 1800 (30 minutes).
 Set the minimum number of seconds to sleep.
 The default is 0.
 .It Fl q
-Quiet mode. Suppress the standard output message indicating how long
+Quiet mode.
+Suppress the standard output message indicating how long
 .Nm
 will sleep.
 .El
@@ -53,8 +55,8 @@ Use in a crontab to run a backup daily at 3:00 AM, with a delay of up to
 .Dl 0 3 * * * /usr/local/bin/randomsleep -c 600 && /path/to/backup.sh
 .Sh SEE ALSO
 .Xr sleep 1 ,
-.Xr arc4random 3 ,
 .Xr getrandom 2 ,
+.Xr arc4random 3 ,
 .Xr cron 8
 .Sh HISTORY
 The

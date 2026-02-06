@@ -35,21 +35,22 @@ endif
 # GCC settings
 CC     ?= gcc
 CFLAGS ?= -O2 -Wall -Wextra -pedantic -std=c99 -D_GNU_SOURCE
+LDFLAGS ?=
 
 all: $(PROG)
 
 $(PROG): $(OBJS)
-	$(CC) $(CFLAGS) -o $@ $(OBJS)
+	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $(OBJS)
 
 install: $(PROG) $(MAN)
-	mkdir -p $(BINDIR)
-	mkdir -p $(MANDIR)
-	install -m 755 $(PROG) $(BINDIR)/$(PROG)
-	install -m 644 $(MAN) $(MANDIR)/$(MAN)
+	mkdir -p $(DESTDIR)$(BINDIR)
+	mkdir -p $(DESTDIR)$(MANDIR)
+	install -m 755 $(PROG) $(DESTDIR)$(BINDIR)/$(PROG)
+	install -m 644 $(MAN) $(DESTDIR)$(MANDIR)/$(MAN)
 
 uninstall:
-	rm -f $(BINDIR)/$(PROG)
-	rm -f $(MANDIR)/$(MAN)
+	rm -f $(DESTDIR)$(BINDIR)/$(PROG)
+	rm -f $(DESTDIR)$(MANDIR)/$(MAN)
 
 clean:
 	rm -f $(PROG) $(OBJS)
