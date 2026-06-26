@@ -6,6 +6,11 @@ SRCS    = grandomsleep.c
 MAN     = randomsleep.1
 OBJS    = $(SRCS:.c=.o)
 
+# Keep in sync with Version: in randomsleep.spec
+VERSION  ?= 1.0.0
+DISTNAME  = $(PROG)-$(VERSION)
+SPEC      = $(PROG).spec
+
 # Standard Linux paths
 PREFIX ?= /usr/local
 BINDIR  = $(PREFIX)/bin
@@ -53,7 +58,19 @@ uninstall:
 	rm -f $(DESTDIR)$(MANDIR)/$(MAN)
 
 clean:
-	rm -f $(PROG) $(OBJS)
+	rm -f $(PROG) $(OBJS) $(DISTNAME).tar.gz
+
+# Reproducible source tarball from committed HEAD (commit the .spec first).
+dist: $(SPEC)
+	git archive --format=tar.gz --prefix=$(DISTNAME)/ -o $(DISTNAME).tar.gz HEAD
+
+# Build binary + source RPMs from the tarball (rpmbuild reads the bundled spec).
+rpm: dist
+	rpmbuild -ta $(DISTNAME).tar.gz
+
+# Source RPM only.
+srpm: dist
+	rpmbuild -ts $(DISTNAME).tar.gz
 
 macos:
 	$(MAKE) -f Makefile
@@ -64,4 +81,4 @@ macos-install:
 macos-clean:
 	$(MAKE) -f Makefile clean
 
-.PHONY: all install uninstall clean macos macos-install macos-clean
+.PHONY: all install uninstall clean dist rpm srpm macos macos-install macos-clean
