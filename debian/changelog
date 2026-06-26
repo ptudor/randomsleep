@@ -1,0 +1,5 @@
+randomsleep (1.0.0-1) unstable; urgency=medium
+
+  * Initial Debian packaging.
+
+ -- Patrick Tudor <ptudor@ptudor.net>  Fri, 26 Jun 2026 12:00:00 +0000

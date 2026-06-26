@@ -1,0 +1,13 @@
+#!/usr/bin/make -f
+# Build flags come from dpkg-buildflags via debhelper; the GNUmakefile honors
+# them through its CFLAGS ?= / LDFLAGS ?= defaults. Enable all hardening
+# features (adds bindnow/full RELRO on top of the Debian defaults) -- a
+# run-once cron helper does not care about the small startup cost.
+export DEB_BUILD_MAINT_OPTIONS = hardening=+all
+
+%:
+	dh $@
+
+# The upstream GNUmakefile defaults PREFIX to /usr/local; Debian wants /usr.
+override_dh_auto_install:
+	dh_auto_install -- PREFIX=/usr

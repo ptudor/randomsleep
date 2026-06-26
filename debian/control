@@ -1,0 +1,22 @@
+Source: randomsleep
+Section: admin
+Priority: optional
+Maintainer: Patrick Tudor <ptudor@ptudor.net>
+Build-Depends: debhelper-compat (= 13)
+Standards-Version: 4.7.2
+Homepage: https://github.com/ptudor/randomsleep
+Vcs-Git: https://github.com/ptudor/randomsleep.git
+Vcs-Browser: https://github.com/ptudor/randomsleep
+Rules-Requires-Root: no
+
+Package: randomsleep
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: cryptographically secure random delay utility for cron jitter
+ randomsleep introduces a cryptographically secure random delay, intended for
+ cron jobs to add jitter and avoid "thundering herd" problems where many hosts
+ contact a central service or start heavy jobs at the same instant.
+ .
+ On Linux it draws randomness from the getrandom(2) syscall and uses rejection
+ sampling to produce an unbiased delay between a floor and a ceiling (default
+ 0 to 1800 seconds).
