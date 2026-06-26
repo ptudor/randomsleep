@@ -1,2 +1,23 @@
+# Compiled output
 randomsleep
 *.o
+
+# Source tarballs (make dist; Debian orig/debian tarballs)
+/randomsleep-*.tar.gz
+/randomsleep_*.tar.*
+
+# Package artifacts (RPM and Debian)
+*.rpm
+*.deb
+*.ddeb
+*.dsc
+*.changes
+*.buildinfo
+
+# Debian in-tree build leftovers (dpkg-buildpackage run in this directory)
+/debian/randomsleep/
+/debian/.debhelper/
+/debian/debhelper-build-stamp
+/debian/files
+/debian/*.substvars
+/debian/tmp/
