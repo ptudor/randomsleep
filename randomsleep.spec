@@ -1,12 +1,12 @@
 # Keep Version in sync with VERSION in GNUmakefile.
 Name:           randomsleep
-Version:        1.0.0
+Version:        1.0.1
 Release:        1%{?dist}
 Summary:        Cryptographically secure random delay utility for cron jitter
 
 License:        ISC
 URL:            https://github.com/ptudor/%{name}
-Source0:        %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
+Source0:        %{url}/archive/%{version}/%{name}-%{version}.tar.gz
 
 BuildRequires:  gcc
 BuildRequires:  make
@@ -37,5 +37,5 @@ sampling to produce an unbiased delay between a floor and a ceiling (default
 %{_mandir}/man1/%{name}.1*
 
 %changelog
-* Fri Jun 26 2026 Patrick Tudor <ptudor@ptudor.net> - 1.0.0-1
-- Initial RPM packaging
+* Fri Jun 26 2026 Patrick Tudor <ptudor@ptudor.net> - 1.0.1-1
+- Initial RPM packaging (first packaged release; 1.0.0 was source only).

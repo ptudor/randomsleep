@@ -7,7 +7,7 @@ MAN     = randomsleep.1
 OBJS    = $(SRCS:.c=.o)
 
 # Keep in sync with Version: in randomsleep.spec
-VERSION  ?= 1.0.0
+VERSION  ?= 1.0.1
 DISTNAME  = $(PROG)-$(VERSION)
 SPEC      = $(PROG).spec
 

@@ -1,5 +1,5 @@
-randomsleep (1.0.0-1) unstable; urgency=medium
+randomsleep (1.0.1-1) unstable; urgency=medium
 
-  * Initial Debian packaging.
+  * Initial Debian packaging (first packaged release; 1.0.0 was source only).
 
  -- Patrick Tudor <ptudor@ptudor.net>  Fri, 26 Jun 2026 12:00:00 +0000
